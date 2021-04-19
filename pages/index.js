@@ -145,35 +145,44 @@ export default function Home() {
 						food.
 					</Text>
 					<Box mt="40px">
-						<Button
-							variant="solid"
-							bg="primary.0"
-							color="white"
-							borderRadius="full"
-							w="253px"
-							h="59px"
-							fontWeight={500}
-							fontSize="18px"
-							_hover={{
-								bg: "#462026",
-							}}
-						>
-							Order online
-						</Button>
-						<Button
-							variant="outline"
-							color="primary.0"
-							borderColor="primary.0"
-							borderRadius="full"
-							w="253px"
-							h="59px"
-							ml="30px"
-							border="2px"
-							fontWeight={500}
-							fontSize="18px"
-						>
-							Make reservation
-						</Button>
+						<Link href="https://www.doordash.com/store/pie-in-the-sky-baltimore-220241/">
+							<a>
+								<Button
+									variant="solid"
+									bg="primary.0"
+									color="white"
+									borderRadius="full"
+									w="253px"
+									h="59px"
+									fontWeight={500}
+									fontSize="18px"
+									_hover={{
+										bg: "#462026",
+									}}
+								>
+									Order online
+								</Button>
+							</a>
+						</Link>
+
+						<Link href="/reservation">
+							<a>
+								<Button
+									variant="outline"
+									color="primary.0"
+									borderColor="primary.0"
+									borderRadius="full"
+									w="253px"
+									h="59px"
+									ml="30px"
+									border="2px"
+									fontWeight={500}
+									fontSize="18px"
+								>
+									Make reservation
+								</Button>
+							</a>
+						</Link>
 					</Box>
 				</Box>
 				<Box display={["none", "block"]}>

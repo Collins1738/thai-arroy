@@ -10,6 +10,9 @@ const colors = {
 	gluttenFree: {
 		0: "#98D177",
 	},
+	background: {
+		0: "rgba(255, 255, 255, 0.9)",
+	},
 };
 
 const textStyles = {
@@ -23,6 +26,12 @@ const textStyles = {
 		fontSize: "17px",
 		fontWeight: 400,
 		color: "#848484",
+	},
+
+	body22: {
+		fontSize: "17px",
+		fontWeight: 400,
+		color: "#505050",
 	},
 
 	body3: {
@@ -41,6 +50,12 @@ const textStyles = {
 		fontWeight: 600,
 		textTransform: "uppercase",
 		color: "rgba(255, 255, 255, 0.80)",
+	},
+	menuGroupLabel: {
+		fontSize: "30px",
+		fontWeight: 700,
+		color: "#50242B",
+		textTransform: "capitalize",
 	},
 };
 

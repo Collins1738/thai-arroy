@@ -13,7 +13,15 @@ export default function Navbar() {
 	const router = useRouter();
 	const currentPath = router.asPath;
 	return (
-		<Flex h="74px" w="100%" bg="primary.0" alignItems="center">
+		<Flex
+			h="74px"
+			w="100%"
+			bg="primary.0"
+			alignItems="center"
+			pos="sticky"
+			top="0px"
+			zIndex="10"
+		>
 			<Circle bg="white" w="90px" h="50px">
 				<Text>Logo</Text>
 			</Circle>
@@ -21,20 +29,29 @@ export default function Navbar() {
 			<Flex w="525px" justifyContent="space-around">
 				<Link href="/">
 					<a>
-						<Text {...textStyles}>Home</Text>
-						{currentPath === "/" && <ActiveBar />}
+						<Flex flexDir="column" alignItems="center">
+							<Text {...textStyles}>Home</Text>
+							{currentPath === "/" && <ActiveBar />}
+						</Flex>
 					</a>
 				</Link>
-
 				<Link href="/menu">
 					<a>
-						<Text {...textStyles}>Menu</Text>
-						{currentPath === "/menu" && <ActiveBar />}
+						<Flex flexDir="column" alignItems="center">
+							<Text {...textStyles}>Menu</Text>
+							{currentPath === "/menu" && <ActiveBar />}
+						</Flex>
 					</a>
 				</Link>
-
 				<Text {...textStyles}>Contact</Text>
-				<Text {...textStyles}>Reservation</Text>
+				<Link href="/reservation">
+					<a>
+						<Flex flexDir="column" alignItems="center">
+							<Text {...textStyles}>Reservation</Text>
+							{currentPath === "/reservation" && <ActiveBar />}
+						</Flex>
+					</a>
+				</Link>
 			</Flex>
 		</Flex>
 	);
