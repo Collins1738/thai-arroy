@@ -1,5 +1,6 @@
-import { Box, Circle, Flex, Link, Spacer, Text, Image } from "@chakra-ui/react";
+import { Box, Circle, Flex, Spacer, Text, Image } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 function ActiveBar() {
 	return <Box w="46px" h="2px" bg="white" />;
