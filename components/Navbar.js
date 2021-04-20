@@ -1,4 +1,4 @@
-import { Box, Circle, Flex, Link, Spacer, Text } from "@chakra-ui/react";
+import { Box, Circle, Flex, Link, Spacer, Text, Image } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
 function ActiveBar() {
@@ -7,7 +7,7 @@ function ActiveBar() {
 export default function Navbar() {
 	const textStyles = {
 		color: "white",
-		fontSize: "17px",
+		fontSize: "16px",
 		fontWeight: 500,
 	};
 	const router = useRouter();
@@ -21,10 +21,9 @@ export default function Navbar() {
 			pos="sticky"
 			top="0px"
 			zIndex="10"
+			pl="30px"
 		>
-			<Circle bg="white" w="90px" h="50px">
-				<Text>Logo</Text>
-			</Circle>
+			<Image src="/logo.png" />
 			<Spacer />
 			<Flex w="525px" justifyContent="space-around">
 				<Link href="/">
@@ -43,12 +42,26 @@ export default function Navbar() {
 						</Flex>
 					</a>
 				</Link>
-				<Text {...textStyles}>Contact</Text>
+				<Link href="/?contact=true">
+					<a>
+						<Flex flexDir="column" alignItems="center">
+							<Text {...textStyles}>Contact</Text>
+							{currentPath === "/?contact=true" && <ActiveBar />}
+						</Flex>
+					</a>
+				</Link>
 				<Link href="/reservation">
 					<a>
 						<Flex flexDir="column" alignItems="center">
 							<Text {...textStyles}>Reservation</Text>
 							{currentPath === "/reservation" && <ActiveBar />}
+						</Flex>
+					</a>
+				</Link>
+				<Link href="https://www.doordash.com/store/pie-in-the-sky-baltimore-220241/">
+					<a>
+						<Flex flexDir="column" alignItems="center">
+							<Text {...textStyles}>Order online</Text>
 						</Flex>
 					</a>
 				</Link>

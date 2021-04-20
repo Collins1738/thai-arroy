@@ -9,12 +9,23 @@ import {
 	Divider,
 	HStack,
 	Icon,
+	useDisclosure,
+	Modal,
+	ModalOverlay,
+	ModalContent,
+	ModalHeader,
+	ModalCloseButton,
+	ModalBody,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { BsChevronRight } from "react-icons/bs";
 import { FaPhoneAlt, FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import { ImLocation2 } from "react-icons/im";
+import { useRouter } from "next/router";
+import { scroller, Element } from "react-scroll";
+import { operationHoursList } from "./reservation";
+import { ChevronRightIcon } from "@chakra-ui/icons";
 
 export function SpicyTag() {
 	return (
@@ -31,7 +42,66 @@ export function GluttenFreeTag() {
 		</Flex>
 	);
 }
-export default function Home() {
+
+function OperationHoursModal() {
+	const { isOpen, onOpen, onClose } = useDisclosure();
+	return (
+		<>
+			<Button
+				textStyle="body2"
+				fontWeight="400"
+				bg="rgba(0,0,0,0)"
+				_hover={{ bg: "rgba(0,0,0,0)" }}
+				rightIcon={<ChevronRightIcon />}
+				onClick={onOpen}
+			>
+				View operarion hours
+			</Button>
+			<Modal isOpen={isOpen} onClose={onClose}>
+				<ModalOverlay />
+				<ModalContent w="100%" minW="700px" pb="40px">
+					<ModalHeader color="primary.0">Operation hours</ModalHeader>
+					<ModalCloseButton />
+					<ModalBody>
+						<Box mt="20px" w="100%">
+							{operationHoursList.map(({ day, hours }, index) => {
+								return (
+									<Flex
+										bg={
+											index % 2 === 0
+												? "#F8F8F8"
+												: "#FFFFFF"
+										}
+										h="47px"
+										alignItems="center"
+										px="10px"
+									>
+										<Text
+											flex={1}
+											fontWeight={400}
+											textStyle="body22"
+										>
+											{day}
+										</Text>
+										<Text
+											flex={1}
+											textStyle="body22"
+											fontWeight={400}
+										>
+											{hours}
+										</Text>
+									</Flex>
+								);
+							})}
+						</Box>
+					</ModalBody>
+				</ModalContent>
+			</Modal>
+		</>
+	);
+}
+
+function HomePageInner() {
 	const form = () => {
 		const inputProps = {
 			bg: "rgba(196, 196, 196, 0.1)",
@@ -132,11 +202,14 @@ export default function Home() {
 						</Flex>
 					</Flex>
 
-					<Box mt="10px">
+					<Flex mt="10px" alignItems="center">
 						<Text textStyle="body2" color="#178B15">
 							Currently open
 						</Text>
-					</Box>
+						<Box ml="15px">
+							<OperationHoursModal />
+						</Box>
+					</Flex>
 
 					<Text maxW="55ch" textStyle="body" mt="20px">
 						Thai Arroy offers you a thai cuisine serving classic
@@ -372,39 +445,41 @@ export default function Home() {
 			fontWeight: 400,
 		};
 		return (
-			<Box pt="50px" pb="80px" px="30px" maxW="1300px" m="auto">
-				<Text color="white" fontSize="25px" fontWeight={600}>
-					Contact us
-				</Text>
-				<Flex h="400px" mt="20px">
-					<Box flex={1} pt="40px">
-						<Flex>
-							<Icon
-								as={FaPhoneAlt}
-								alignSelf="center"
-								mr="20px"
-								color="white"
-							/>
-							<Text {...fontStyles}>571-989-8721</Text>
+			<Element name="contact">
+				<Box pt="50px" pb="80px" px="30px" maxW="1300px" m="auto">
+					<Text color="white" fontSize="25px" fontWeight={600}>
+						Contact us
+					</Text>
+					<Flex h="400px" mt="20px">
+						<Box flex={1} pt="40px">
+							<Flex>
+								<Icon
+									as={FaPhoneAlt}
+									alignSelf="center"
+									mr="20px"
+									color="white"
+								/>
+								<Text {...fontStyles}>571-989-8721</Text>
+							</Flex>
+							<Flex mt="30px">
+								<Icon
+									as={ImLocation2}
+									alignSelf="center"
+									mr="20px"
+									color="white"
+								/>
+								<Text {...fontStyles}>
+									1019 Light St. Baltimore, MD 21230
+								</Text>
+							</Flex>
+						</Box>
+						<Divider orientation="vertical" h="100%" mr="40px" />
+						<Flex flex={1} pt="20px">
+							{form()}
 						</Flex>
-						<Flex mt="30px">
-							<Icon
-								as={ImLocation2}
-								alignSelf="center"
-								mr="20px"
-								color="white"
-							/>
-							<Text {...fontStyles}>
-								1019 Light St. Baltimore, MD 21230
-							</Text>
-						</Flex>
-					</Box>
-					<Divider orientation="vertical" h="100%" mr="40px" />
-					<Flex flex={1} pt="20px">
-						{form()}
 					</Flex>
-				</Flex>
-			</Box>
+				</Box>
+			</Element>
 		);
 	};
 
@@ -415,6 +490,22 @@ export default function Home() {
 			<Box bg="primary.0">{section3()}</Box>
 		</Box>
 	);
+}
+
+export default function HomePage() {
+	const router = useRouter();
+	const { contact } = router.query;
+	useEffect(() => {
+		console.log(router.query);
+		if (contact === "true") {
+			scroller.scrollTo("contact", {
+				duration: 500,
+				smooth: true,
+			});
+		}
+		return () => {};
+	}, [router]);
+	return <HomePageInner />;
 }
 
 const featuredItems = [

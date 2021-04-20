@@ -90,14 +90,14 @@ export default function ReservationPage() {
 							<AccordionIcon />
 						</AccordionButton>
 						<AccordionPanel>
-							<Box maxW="600px" mt="20px">
+							<Box w="100%" mt="20px">
 								{operationHoursList.map(
 									({ day, hours }, index) => {
 										return (
 											<Flex
 												bg={
 													index % 2 === 0
-														? "#EBEBEB"
+														? "#F8F8F8"
 														: "#FFFFFF"
 												}
 												h="47px"
@@ -269,7 +269,7 @@ export default function ReservationPage() {
 	);
 }
 
-const operationHoursList = [
+export const operationHoursList = [
 	{ day: "Monday", hours: "Closed" },
 	{
 		day: "Tuesday, Wednesday, Thursday",
