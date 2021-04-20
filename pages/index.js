@@ -260,10 +260,10 @@ function HomePageInner() {
 				</Box>
 				<Box display={["none", "block"]}>
 					<Image
-						src="/main2.png"
+						src="/main5.png"
 						objectFit="cover"
 						w="553px"
-						h="277px"
+						h="319px"
 					/>
 				</Box>
 			</Flex>
