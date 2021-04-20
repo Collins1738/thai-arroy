@@ -54,6 +54,7 @@ function OperationHoursModal() {
 				_hover={{ bg: "rgba(0,0,0,0)" }}
 				rightIcon={<ChevronRightIcon />}
 				onClick={onOpen}
+				color="#505050"
 			>
 				View operarion hours
 			</Button>
