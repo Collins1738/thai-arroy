@@ -10,8 +10,60 @@ import {
 	AccordionIcon,
 	AccordionButton,
 	AccordionPanel,
+	useDisclosure,
+	Modal,
+	ModalOverlay,
+	ModalContent,
+	ModalHeader,
+	ModalCloseButton,
+	ModalBody,
+	ModalFooter,
 } from "@chakra-ui/react";
 import { useState } from "react";
+
+function ThankYouModal({ isOpen, onClose }) {
+	return (
+		<Modal isOpen={isOpen} onClose={onClose}>
+			<ModalOverlay />
+			<ModalContent w="100%" minW="700px" pb="20px">
+				<ModalHeader
+					color="primary.0"
+					color="green.500"
+					alignSelf="center"
+					fontSize="24px"
+				>
+					Reservation request sent
+				</ModalHeader>
+				<ModalCloseButton />
+				<ModalBody>
+					<Box mt="10px" w="100%">
+						<Text>
+							We would text and email you when we confirm your
+							reservation. Expect to hear from us soon! Please
+							remember to follow the CDC COVID-19 guidelines and
+							stay 6 feet away from others.
+						</Text>
+					</Box>
+				</ModalBody>
+				<ModalFooter>
+					<Button
+						variant="solid"
+						bg="primary.0"
+						color="white"
+						borderRadius="full"
+						_hover={{
+							bg: "#462026",
+						}}
+						w="85px"
+						onClick={onClose}
+					>
+						Close
+					</Button>
+				</ModalFooter>
+			</ModalContent>
+		</Modal>
+	);
+}
 
 export default function ReservationPage() {
 	const [step, setStep] = useState(1);
@@ -23,6 +75,8 @@ export default function ReservationPage() {
 	const [email, setEmail] = useState("");
 	const [loading, setLoading] = useState(false);
 	const [people, setPeople] = useState(2);
+
+	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	const inputProps = {
 		w: "320px",
@@ -240,9 +294,10 @@ export default function ReservationPage() {
 									setLoading(true);
 									setTimeout(() => {
 										setLoading(false);
-										alert(
-											"Your reservation has been booked"
-										);
+										onOpen();
+										// alert(
+										// 	"Your reservation has been booked"
+										// );
 										setStep(1);
 										setName("");
 										setEmail("");
@@ -265,6 +320,7 @@ export default function ReservationPage() {
 			{operationHours()}
 			{step1()}
 			{step2()}
+			<ThankYouModal isOpen={isOpen} onClose={onClose} />
 		</Box>
 	);
 }
